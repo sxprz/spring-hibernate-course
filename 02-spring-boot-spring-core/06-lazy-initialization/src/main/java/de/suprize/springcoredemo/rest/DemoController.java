@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DemoController {
 
     // define a private field for the dependency
-    private Coach coach;
+    private final Coach coach;
 
     @Autowired
     public DemoController(@Qualifier("cricketCoach") final Coach coach) {
