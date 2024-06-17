@@ -33,7 +33,7 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public List<Student> findAll() {
         // Create query (default for sorting = asc)
-        TypedQuery<Student> query = this.entityManager.createQuery("FROM Student", Student.class);
+        TypedQuery<Student> query = this.entityManager.createQuery("from Student", Student.class);
 
         // Return query results
         return query.getResultList();
@@ -42,7 +42,7 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     public List<Student> findByLastName(String lastName) {
         // Create query
-        TypedQuery<Student> query = this.entityManager.createQuery("FROM Student where lastName=:data", Student.class);
+        TypedQuery<Student> query = this.entityManager.createQuery("from Student where lastName=:data", Student.class);
 
         // Set query params
         query.setParameter("data", lastName);
@@ -62,5 +62,11 @@ public class StudentDAOImpl implements StudentDAO {
     public void delete(Integer id) {
         Student student = this.entityManager.find(Student.class, id);
         this.entityManager.remove(student);
+    }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+        return this.entityManager.createQuery("delete from Student").executeUpdate();
     }
 }
