@@ -2,8 +2,6 @@ package de.suprize.demo.rest;
 
 import de.suprize.demo.entity.Student;
 import jakarta.annotation.PostConstruct;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,34 +33,4 @@ public class StudentRestController {
     public List<Student> getStudents() {
         return this.students;
     }
-
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException e) {
-        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
-
-        // create a StudentErrorResponse
-        StudentErrorResponse error = new StudentErrorResponse();
-        error.setStatus(httpStatus.value());
-        error.setStatus(httpStatus.value());
-        error.setMessage(e.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
-
-        // return ResponseEntity
-        return new ResponseEntity<>(error, httpStatus);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleException(Exception e) {
-        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
-
-        // create a StudentErrorResponse
-        StudentErrorResponse error = new StudentErrorResponse();
-        error.setStatus(httpStatus.value());
-        error.setMessage(e.getMessage());
-        error.setTimeStamp(System.currentTimeMillis());
-
-        // return ResponseEntity
-        return new ResponseEntity<>(error, httpStatus);
-    }
-
 }
