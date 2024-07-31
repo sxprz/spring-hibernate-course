@@ -2,10 +2,7 @@ package de.suprize.springboot.cruddemo.rest;
 
 import de.suprize.springboot.cruddemo.entity.Employee;
 import de.suprize.springboot.cruddemo.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +29,15 @@ public class EmployeeRestController {
         }
 
         return employee;
+    }
+
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee employee) {
+        // Because of the functionality of entityManager.merge(), we set the id to 0
+        // if id == 0, it inserts, else it updates an existing employee with the given id
+        employee.setId(0);
+
+        return this.employeeService.save(employee);
     }
 
 }
