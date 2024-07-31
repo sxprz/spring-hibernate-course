@@ -40,4 +40,14 @@ public class EmployeeRestController {
         return this.employeeService.save(employee);
     }
 
+    @PutMapping("/employees")
+    public Employee updateEmployee(@RequestBody Employee employee) {
+        return this.employeeService.save(employee);
+    }
+
+    @DeleteMapping("/employees/{employeeId}")
+    public void deleteEmployee(@PathVariable int employeeId) {
+
+    }
+
 }
